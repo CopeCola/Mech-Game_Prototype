@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwrjgtqpj084p"]
+
+[ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="1_kxub5"]
+[ext_resource type="Script" uid="uid://c1x07202hqoke" path="res://Scenes/Weapons/basic_bullet.gd" id="1_ou2kd"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ou2kd"]
+
+[node name="BasicBullet" type="Area2D"]
+script = ExtResource("1_ou2kd")
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.33993, 0.539475)
+shape = SubResource("CircleShape2D_ou2kd")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.127, 1, 0.03, 1)
+scale = Vector2(0.17, 0.04)
+texture = ExtResource("1_kxub5")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.202457, 0.172631)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

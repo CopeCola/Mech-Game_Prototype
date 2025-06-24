@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Collectable" load_steps=3 format=3 uid="uid://c52kjslv3jr3c"]
+
+[ext_resource type="Script" uid="uid://dvdyv6i6hg7hu" path="res://Scenes/Collectables/Collectable_resource.gd" id="1_0opnk"]
+[ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="2_packr"]
+
+[resource]
+script = ExtResource("1_0opnk")
+type = 2
+texture = ExtResource("2_packr")
+description = "upgrade mod for the mech"
+color = Color(2.21401e-06, 0.686638, 3.27289e-06, 1)
+amount = 1
+metadata/_custom_type_script = "uid://dvdyv6i6hg7hu"

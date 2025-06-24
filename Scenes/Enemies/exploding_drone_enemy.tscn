@@ -1,0 +1,107 @@
+[gd_scene load_steps=9 format=3 uid="uid://gob46hox5lyw"]
+
+[ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="1_ee00f"]
+[ext_resource type="Script" uid="uid://bykemp7c8y0pt" path="res://Scenes/Enemies/exploding_drone_enemy.gd" id="1_paae8"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_paae8"]
+radius = 9.20804
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_s3rny"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_apikv"]
+
+[sub_resource type="Animation" id="Animation_s3rny"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0.585, 0.17, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.05, 0.0504518)]
+}
+
+[sub_resource type="Animation" id="Animation_paae8"]
+resource_name = "explode"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.931942, 0, 0.088143, 1), Color(1, 1, 1, 1), Color(0.933333, 0, 0.0862745, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.05, 0.0504518), Vector2(0.1, 0.1), Vector2(0.15, 0.15), Vector2(0.15, 0.15)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_apikv"]
+_data = {
+&"RESET": SubResource("Animation_s3rny"),
+&"explode": SubResource("Animation_paae8")
+}
+
+[node name="ExplodingDrone" type="CharacterBody2D" groups=["enemy"]]
+motion_mode = 1
+script = ExtResource("1_paae8")
+speed = 100.0
+zigzag_amount = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(0.379008, 0.379008)
+shape = SubResource("CircleShape2D_paae8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 0.585, 0.17, 1)
+scale = Vector2(0.05, 0.0504518)
+texture = ExtResource("1_ee00f")
+
+[node name="ExplodeRadius" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExplodeRadius"]
+scale = Vector2(0.892466, 0.892466)
+shape = SubResource("CircleShape2D_s3rny")
+
+[node name="HitBox" type="Area2D" parent="." groups=["enemy"]]
+scale = Vector2(0.996259, 1.00472)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitBox"]
+scale = Vector2(0.411388, 0.411388)
+shape = SubResource("CircleShape2D_apikv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_apikv")
+}
+
+[connection signal="body_entered" from="ExplodeRadius" to="." method="_on_explode_radius_body_entered"]

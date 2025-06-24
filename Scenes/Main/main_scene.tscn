@@ -1,0 +1,195 @@
+[gd_scene load_steps=12 format=3 uid="uid://cwgvxsdqpmmt1"]
+
+[ext_resource type="Shader" uid="uid://c7gg8eo6x5m24" path="res://Shaders/new_shader.gdshader" id="1_llcsg"]
+[ext_resource type="PackedScene" uid="uid://facd1g144ddd" path="res://Scenes/Mech/mech.tscn" id="1_qd8ud"]
+[ext_resource type="Script" uid="uid://c87chamd7oc3l" path="res://Scenes/Main/main_scene.gd" id="1_ywtrf"]
+[ext_resource type="PackedScene" uid="uid://buxsds0l5crjn" path="res://Scenes/Main/main_camera.tscn" id="4_d5b16"]
+[ext_resource type="PackedScene" uid="uid://45n5gmmx1e3r" path="res://Scenes/Spawners/basic_enemy_spawner.tscn" id="4_ywtrf"]
+[ext_resource type="PackedScene" uid="uid://cbm7xejjcyism" path="res://Scenes/Survivor/survivor.tscn" id="5_dahi5"]
+[ext_resource type="PackedScene" uid="uid://b2al7vbiun14i" path="res://Scenes/Environment/ruin_type_1.tscn" id="6_ip5ju"]
+[ext_resource type="PackedScene" uid="uid://co7bgnjstbsvx" path="res://Scenes/Enemies/basic_enemy.tscn" id="8_vudmy"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dahi5"]
+font_size = 48
+font_color = Color(1, 1, 0, 1)
+outline_size = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_ip5ju"]
+font_size = 32
+font_color = Color(0, 0, 0.611765, 1)
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_llcsg"]
+shader = ExtResource("1_llcsg")
+shader_parameter/grid_size = Vector2(50, 50)
+shader_parameter/color1 = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/color2 = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/aspect_ratio_vector = Vector2(1, 1.1)
+
+[node name="MainScene" type="Node2D"]
+script = ExtResource("1_ywtrf")
+
+[node name="MainCamera" parent="." groups=["camera"] instance=ExtResource("4_d5b16")]
+position = Vector2(2172, 1546)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = -11.5
+offset_right = 69.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Surviors rescued: "
+label_settings = SubResource("LabelSettings_dahi5")
+
+[node name="Control2" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control2"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -371.0
+offset_right = -6.0
+offset_bottom = 256.0
+grow_horizontal = 0
+text = "MOVE: WASD     
+FIRE: HOLD LEFT CLICK
+FIRE_MODE: F
+DASH: SPACE
+EJECT PILOT: C
+EJECT SMALL MECH: V
+ENTER MECHS: E
+REPAIR MECH: RIGHT CLICK"
+label_settings = SubResource("LabelSettings_ip5ju")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_llcsg")
+offset_top = 1.0
+offset_right = 40.0
+offset_bottom = 41.0
+scale = Vector2(110.319, 66.1289)
+
+[node name="Mech" parent="." instance=ExtResource("1_qd8ud")]
+position = Vector2(2165, 1539)
+
+[node name="BasicEnemySpawner" parent="Mech" instance=ExtResource("4_ywtrf")]
+position = Vector2(-289, -410)
+scale = Vector2(28.2423, 14.8178)
+
+[node name="BulletContainer" type="Node2D" parent="." groups=["bullet_container"]]
+
+[node name="EnemyBulletContainer" type="Node2D" parent="." groups=["enemy_bullet_container"]]
+
+[node name="EnemyContainer" type="Node2D" parent="." groups=["enemy_container"]]
+
+[node name="DeadEnemyContainer" type="Node2D" parent="." groups=["dead_enemy_container"]]
+
+[node name="EnemyDroneContainer" type="Node2D" parent="." groups=["enemy_drone_container"]]
+
+[node name="SurvivorContainer" type="Node2D" parent="."]
+
+[node name="Survivor" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(2061, 914)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="Survivor2" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(1921, 1310)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="Survivor3" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(1939, 1670)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="Survivor4" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(953, 1031)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="Survivor5" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(1184, 800)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="Survivor6" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(1191, 997)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="Survivor7" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(2591, 1581)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="Survivor8" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(2516, 1677)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="Survivor9" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(2695, 2252)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="Survivor10" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(2027, 2359)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="Survivor11" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(3982, 2431)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="Survivor12" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(4060, 2271)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="Survivor13" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(3781, 583)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="Survivor14" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(2497, 464)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="Survivor15" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(1662, 174)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="Survivor16" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
+position = Vector2(1817, 177)
+scale = Vector2(0.26066, 0.26066)
+
+[node name="CollectableContainer" type="Node2D" parent="." groups=["collectable_container"]]
+
+[node name="RuinType1" parent="." instance=ExtResource("6_ip5ju")]
+position = Vector2(2455, 1629)
+scale = Vector2(1.80231, 1.80231)
+
+[node name="BasicEnemy" parent="." instance=ExtResource("8_vudmy")]
+position = Vector2(2000, 1164)

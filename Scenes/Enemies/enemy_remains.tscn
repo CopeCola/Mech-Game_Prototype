@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://c8w0djodx84e0"]
+
+[ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="1_h4r8m"]
+[ext_resource type="Script" uid="uid://d0wa0ave8v2jj" path="res://Scenes/Enemies/enemy_remains.gd" id="1_qxw72"]
+[ext_resource type="Script" uid="uid://dvdyv6i6hg7hu" path="res://Scenes/Collectables/Collectable_resource.gd" id="2_68lrl"]
+[ext_resource type="Resource" uid="uid://bunggdec0ksmf" path="res://Scenes/Collectables/ammo.tres" id="3_edq70"]
+[ext_resource type="Resource" uid="uid://bmvh1vjmltuod" path="res://Scenes/Collectables/fuel.tres" id="4_yelcr"]
+[ext_resource type="Resource" uid="uid://c52kjslv3jr3c" path="res://Scenes/Collectables/upgrade_module.tres" id="5_e0db4"]
+
+[node name="EnemyRemains" type="Node2D"]
+scale = Vector2(1.00179, 1)
+script = ExtResource("1_qxw72")
+possible_drops = Array[ExtResource("2_68lrl")]([ExtResource("3_edq70"), ExtResource("4_yelcr"), ExtResource("5_e0db4")])
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(-5.63618, -1.0582)
+rotation = -0.296553
+scale = Vector2(0.110996, 0.0304856)
+texture = ExtResource("1_h4r8m")
+
+[node name="Sprite2D4" type="Sprite2D" parent="."]
+position = Vector2(-2.63618, 0.941803)
+rotation = -0.0139832
+scale = Vector2(0.0653301, 0.0346759)
+texture = ExtResource("1_h4r8m")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(6.36382, -0.0581965)
+rotation = 0.184251
+scale = Vector2(0.089839, -0.0294301)
+texture = ExtResource("1_h4r8m")
+
+[node name="Sprite2D5" type="Sprite2D" parent="."]
+position = Vector2(3.36382, -0.0581965)
+rotation = 0.288133
+scale = Vector2(0.103946, 0.0359573)
+texture = ExtResource("1_h4r8m")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="SpawnPoints"]
+
+[node name="Marker2D2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(4.99108, -4)
+
+[node name="Marker2D3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-4.99108, 4)
+
+[node name="Marker2D4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-4.99108, -4)
+
+[node name="Marker2D5" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(4.99108, 4)

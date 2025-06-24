@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbm7xejjcyism"]
+
+[ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="1_ekc66"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4v0ab"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_dwosw"]
+font_size = 42
+font_color = Color(1, 1, 0, 1)
+
+[node name="Survivor" type="Area2D" groups=["survivor"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
+texture = ExtResource("1_ekc66")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(-10.8415, -10.8415)
+shape = SubResource("CircleShape2D_4v0ab")
+
+[node name="Label" type="Label" parent="."]
+offset_left = -97.0
+offset_top = -120.0
+offset_right = 109.0
+offset_bottom = -62.0
+text = "SURVIVOR"
+label_settings = SubResource("LabelSettings_dwosw")

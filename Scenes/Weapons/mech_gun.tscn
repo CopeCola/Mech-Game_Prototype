@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://kyvv7fi80io3"]
+
+[ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="1_8j4go"]
+[ext_resource type="Script" uid="uid://b153ycc47ic6t" path="res://Scenes/Weapons/mech_gun.gd" id="1_risxw"]
+
+[node name="MechGun" type="Node2D"]
+script = ExtResource("1_risxw")
+
+[node name="Base" type="Sprite2D" parent="."]
+modulate = Color(0.17, 0.17, 0.17, 1)
+position = Vector2(0, -1.19209e-07)
+texture = ExtResource("1_8j4go")
+
+[node name="Barrel" type="Sprite2D" parent="Base"]
+position = Vector2(120, 1.19209e-07)
+rotation = 1.56581
+scale = Vector2(0.362238, 2.1421)
+texture = ExtResource("1_8j4go")
+
+[node name="BarrelEnd" type="Marker2D" parent="."]
+position = Vector2(282, 0)

@@ -1,0 +1,34 @@
+[gd_scene load_steps=2 format=3 uid="uid://45n5gmmx1e3r"]
+
+[ext_resource type="Script" uid="uid://c35hpu5igil2l" path="res://Scenes/Spawners/basic_enemy_spawner.gd" id="1_2f7wd"]
+
+[node name="BasicEnemySpawner" type="Node2D"]
+script = ExtResource("1_2f7wd")
+
+[node name="SpawnPosContainer" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="SpawnPosContainer"]
+
+[node name="Marker2D2" type="Marker2D" parent="SpawnPosContainer"]
+position = Vector2(3, 0)
+
+[node name="Marker2D3" type="Marker2D" parent="SpawnPosContainer"]
+position = Vector2(6, 0)
+
+[node name="Marker2D4" type="Marker2D" parent="SpawnPosContainer"]
+position = Vector2(9, 0)
+
+[node name="Marker2D5" type="Marker2D" parent="SpawnPosContainer"]
+position = Vector2(12, 0)
+
+[node name="Marker2D6" type="Marker2D" parent="SpawnPosContainer"]
+position = Vector2(15, 0)
+
+[node name="Marker2D7" type="Marker2D" parent="SpawnPosContainer"]
+position = Vector2(18, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

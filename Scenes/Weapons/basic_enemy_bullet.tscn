@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dngbvkgtnvr5p"]
+
+[ext_resource type="Script" uid="uid://ddxsou3mn5o0r" path="res://Scenes/Weapons/basic_enemy_bullet.gd" id="1_wm2np"]
+[ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="2_s4g4p"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jrd0s"]
+
+[node name="BasicEnemyBullet" type="Area2D" groups=["enemy_bullet"]]
+script = ExtResource("1_wm2np")
+damage = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2.97284, 0.948441)
+shape = SubResource("CircleShape2D_jrd0s")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.884314, 3.0563e-06, 1.82897e-06, 1)
+scale = Vector2(0.384962, 0.0712893)
+texture = ExtResource("2_s4g4p")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.405904, 0.405904)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

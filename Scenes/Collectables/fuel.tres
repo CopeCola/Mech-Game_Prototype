@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Collectable" load_steps=3 format=3 uid="uid://bmvh1vjmltuod"]
+
+[ext_resource type="Script" uid="uid://dvdyv6i6hg7hu" path="res://Scenes/Collectables/Collectable_resource.gd" id="1_2gpls"]
+[ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="2_mu4ng"]
+
+[resource]
+script = ExtResource("1_2gpls")
+type = 1
+texture = ExtResource("2_mu4ng")
+description = "fuel for mechs"
+color = Color(0.552962, 3.97079e-07, 4.81307e-07, 1)
+amount = 20
+metadata/_custom_type_script = "uid://dvdyv6i6hg7hu"

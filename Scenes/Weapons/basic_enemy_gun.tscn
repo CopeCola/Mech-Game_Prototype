@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://ugjcortrum44"]
+
+[ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="1_8i7vg"]
+[ext_resource type="Script" uid="uid://c6678cr3olbdu" path="res://Scenes/Weapons/basic_enemy_gun.gd" id="1_ixse2"]
+
+[node name="BasicEnemyGun" type="Node2D"]
+script = ExtResource("1_ixse2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.13, 0.13, 0.13, 1)
+scale = Vector2(0.192862, 0.0141283)
+texture = ExtResource("1_8i7vg")
+offset = Vector2(80, 0)
+
+[node name="BarrelEnd" type="Marker2D" parent="."]
+position = Vector2(29, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

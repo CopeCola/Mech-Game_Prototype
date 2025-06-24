@@ -1,0 +1,86 @@
+[gd_scene load_steps=9 format=3 uid="uid://co7bgnjstbsvx"]
+
+[ext_resource type="Script" uid="uid://cuyl7ve3dqu6l" path="res://Scenes/Enemies/basic_enemy.gd" id="1_jln43"]
+[ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="1_px3k0"]
+[ext_resource type="PackedScene" uid="uid://ugjcortrum44" path="res://Scenes/Weapons/basic_enemy_gun.tscn" id="3_wm5yt"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jln43"]
+
+[sub_resource type="Animation" id="Animation_wm5yt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.608233, 0, 0.34051, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_jln43"]
+resource_name = "take_damage"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1), Color(0.70901, 0, 0.280787, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_00oey"]
+_data = {
+&"RESET": SubResource("Animation_wm5yt"),
+&"take_damage": SubResource("Animation_jln43")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wm5yt"]
+
+[node name="BasicEnemy" type="CharacterBody2D" groups=["enemy"]]
+motion_mode = 1
+script = ExtResource("1_jln43")
+rush_speed_multiplier = 1.2
+enemy_speed = 6000
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.608233, 0, 0.34051, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("1_px3k0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(2.11564, 2.11564)
+shape = SubResource("CircleShape2D_jln43")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_00oey")
+}
+
+[node name="BasicEnemyGun" parent="." instance=ExtResource("3_wm5yt")]
+
+[node name="ShootEnabledArea" type="Area2D" parent="."]
+scale = Vector2(0.45017, 0.45017)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ShootEnabledArea"]
+position = Vector2(24.4352, 2.22138)
+scale = Vector2(80, 80)
+shape = SubResource("CircleShape2D_wm5yt")
+
+[node name="DroneDeployPos" type="Marker2D" parent="."]
+
+[node name="DroneDeployTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[connection signal="body_entered" from="ShootEnabledArea" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="ShootEnabledArea" to="." method="_on_area_2d_body_exited"]
+[connection signal="timeout" from="DroneDeployTimer" to="." method="_on_drone_deploy_timer_timeout"]

@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cj2a2v6wgasaf"]
+
+[ext_resource type="Script" uid="uid://cebnm67an6k4x" path="res://Scenes/Collectables/collectable.gd" id="1_ix4r6"]
+[ext_resource type="Resource" uid="uid://bunggdec0ksmf" path="res://Scenes/Collectables/ammo.tres" id="2_efbn4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ix4r6"]
+
+[node name="Collectable" type="Area2D" node_paths=PackedStringArray("sprite")]
+scale = Vector2(1, 1.00696)
+script = ExtResource("1_ix4r6")
+sprite = NodePath("Sprite2D")
+resource_data = ExtResource("2_efbn4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_ix4r6")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Collectable" load_steps=3 format=3 uid="uid://bunggdec0ksmf"]
+
+[ext_resource type="Script" uid="uid://dvdyv6i6hg7hu" path="res://Scenes/Collectables/Collectable_resource.gd" id="1_m5igg"]
+[ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="2_bgyml"]
+
+[resource]
+script = ExtResource("1_m5igg")
+type = 0
+texture = ExtResource("2_bgyml")
+description = "ammo for the SMG"
+color = Color(0.625276, 0.280307, 0.0700759, 1)
+amount = 10
+metadata/_custom_type_script = "uid://dvdyv6i6hg7hu"

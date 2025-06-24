@@ -1,0 +1,100 @@
+[gd_scene load_steps=12 format=3 uid="uid://csid23t4j3w1j"]
+
+[ext_resource type="Script" uid="uid://b6ih08emx5l3l" path="res://Scenes/Small_Mech/small_mech.gd" id="1_248c7"]
+[ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="1_pams7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_248c7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pluvp"]
+
+[sub_resource type="Animation" id="Animation_qkgiu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.0941176, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_2emxb"]
+resource_name = "take_damage"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0.982644, 0.0010384, 0.000570831, 1), Color(1, 1, 1, 1), Color(0.984314, 0, 0, 1), Color(1, 1, 1, 1), Color(0.0941176, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lrbxq"]
+_data = {
+&"RESET": SubResource("Animation_qkgiu"),
+&"take_damage": SubResource("Animation_2emxb")
+}
+
+[sub_resource type="Gradient" id="Gradient_2emxb"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_r2v38"]
+gradient = SubResource("Gradient_2emxb")
+
+[sub_resource type="Gradient" id="Gradient_qkgiu"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sg84m"]
+gradient = SubResource("Gradient_qkgiu")
+
+[node name="SmallMech" type="CharacterBody2D" groups=["small_mech"]]
+script = ExtResource("1_248c7")
+small_mech_max_speed = 12000.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1.36927, 1.36927)
+shape = SubResource("CircleShape2D_248c7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.0941176, 0, 0, 1)
+scale = Vector2(0.207095, 0.207095)
+texture = ExtResource("1_pams7")
+
+[node name="PilotExitPos" type="Marker2D" parent="."]
+position = Vector2(0, 25)
+
+[node name="InteractArea" type="Area2D" parent="." groups=["small_mech"]]
+scale = Vector2(0.362834, 0.362834)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
+scale = Vector2(5.6832, 5.19827)
+shape = SubResource("CircleShape2D_pluvp")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_lrbxq")
+}
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="."]
+offset_left = -11.0
+offset_top = -12.0
+offset_right = 53.0
+offset_bottom = 52.0
+scale = Vector2(0.336178, 0.0493527)
+max_value = 20.0
+texture_under = SubResource("GradientTexture2D_r2v38")
+texture_progress = SubResource("GradientTexture2D_sg84m")
+
+[connection signal="area_entered" from="InteractArea" to="." method="_on_interact_area_area_entered"]
+[connection signal="area_exited" from="InteractArea" to="." method="_on_interact_area_area_exited"]

@@ -1,0 +1,65 @@
+[gd_scene load_steps=3 format=3 uid="uid://b2al7vbiun14i"]
+
+[ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="1_txer7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txer7"]
+
+[node name="RuinType1" type="Node2D"]
+
+[node name="wall" type="StaticBody2D" parent="." groups=["building"]]
+scale = Vector2(0.0875856, 0.887587)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall"]
+scale = Vector2(6.13636, 6.02833)
+shape = SubResource("RectangleShape2D_txer7")
+
+[node name="Sprite2D" type="Sprite2D" parent="wall"]
+texture = ExtResource("1_txer7")
+
+[node name="wall2" type="StaticBody2D" parent="." groups=["building"]]
+position = Vector2(51, -53)
+rotation = 1.57108
+scale = Vector2(0.0875856, 0.887587)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall2"]
+scale = Vector2(6.13636, 6.02833)
+shape = SubResource("RectangleShape2D_txer7")
+
+[node name="Sprite2D" type="Sprite2D" parent="wall2"]
+texture = ExtResource("1_txer7")
+
+[node name="wall3" type="StaticBody2D" parent="." groups=["building"]]
+position = Vector2(105, -1)
+rotation = -0.00136301
+scale = Vector2(0.0875856, 0.887587)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall3"]
+scale = Vector2(6.13636, 6.02833)
+shape = SubResource("RectangleShape2D_txer7")
+
+[node name="Sprite2D" type="Sprite2D" parent="wall3"]
+texture = ExtResource("1_txer7")
+
+[node name="wall4" type="StaticBody2D" parent="." groups=["building"]]
+position = Vector2(28, 52)
+rotation = 1.57265
+scale = Vector2(0.0875856, 0.520721)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall4"]
+scale = Vector2(6.13636, 6.02833)
+shape = SubResource("RectangleShape2D_txer7")
+
+[node name="Sprite2D" type="Sprite2D" parent="wall4"]
+texture = ExtResource("1_txer7")
+
+[node name="wall5" type="StaticBody2D" parent="." groups=["building"]]
+position = Vector2(72, 7.62939e-06)
+rotation = 1.57265
+scale = Vector2(0.0875856, 0.520721)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="wall5"]
+scale = Vector2(6.13636, 6.02833)
+shape = SubResource("RectangleShape2D_txer7")
+
+[node name="Sprite2D" type="Sprite2D" parent="wall5"]
+texture = ExtResource("1_txer7")
