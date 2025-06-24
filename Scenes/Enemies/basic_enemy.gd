@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name BasicEnemy
 
+signal test_git
 signal enemy_died
 
 @onready var enemy_remains = preload("res://Scenes/Enemies/enemy_remains.tscn")
