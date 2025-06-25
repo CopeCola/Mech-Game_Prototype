@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Mech
 
+var testing_git
 @onready var pilot_scene = preload("res://Scenes/Pilot/Pilot.tscn")
 @onready var small_mech_scene = preload("res://Scenes/Small_Mech/small_mech.tscn")
 @onready var pilot_exit_pos: Marker2D = $PilotExitPos

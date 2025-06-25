@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Andrzej Jam Challenge Prototype"
+config/tags=PackedStringArray("git_controlled", "testing")
 run/main_scene="uid://cwgvxsdqpmmt1"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 run/max_fps=60
