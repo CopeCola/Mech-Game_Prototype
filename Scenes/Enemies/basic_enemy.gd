@@ -13,8 +13,13 @@ signal enemy_died
 @onready var drone_deploy_timer: Timer = $DroneDeployTimer
 
 @export var rush_distance: float = 500
+
 @export var retreat_distance: float = 200
 @export var stop_distance: float = 300
+
+@export var small_mech_retreat_distance: float = 200
+@export var small_mech_stop_distance: float = 300
+
 @export var retreat_speed_multiplier: float = 1.2
 @export var rush_speed_multiplier: float = 2
 
@@ -66,11 +71,11 @@ func handle_small_mech_movement(delta):
 	if distance_to_small_mech > rush_distance:
 		velocity = direction_to_small_mech * enemy_speed * rush_speed_multiplier * delta
 		
-	elif distance_to_small_mech < retreat_distance:
+	elif distance_to_small_mech < small_mech_retreat_distance:
 		# Move away 
 		velocity = -direction_to_small_mech * enemy_speed * retreat_speed_multiplier * delta
 		
-	elif distance_to_small_mech <= stop_distance:
+	elif distance_to_small_mech <= small_mech_stop_distance:
 		# Stop completely
 		velocity = Vector2.ZERO
 		

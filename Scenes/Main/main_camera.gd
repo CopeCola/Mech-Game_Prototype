@@ -6,7 +6,7 @@ enum CameraState {ON_MECH, ON_SMALL_MECH, ON_PILOT}
 @onready var state = CameraState.ON_MECH
 var target_zoom: Vector2 = mech_zoom
 
-@export var mech_zoom := Vector2(2,2)
+@export var mech_zoom := Vector2(1,1)
 @export var small_mech_zoom := Vector2(3,3)
 @export var pilot_zoom := Vector2(4,4)
 @export var zoom_transition_speed: float = 5.0

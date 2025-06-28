@@ -2,7 +2,7 @@ extends Node2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
-var damage:= 3
+var damage:= 6
 
 
 func _input(event: InputEvent) -> void:

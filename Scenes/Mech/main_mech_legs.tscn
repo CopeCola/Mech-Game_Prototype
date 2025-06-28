@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxy1360wkpm5b"]
+
+[ext_resource type="Script" uid="uid://cmmpcqsuy48kn" path="res://Scenes/Mech/main_mech_legs.gd" id="1_0mbvt"]
+[ext_resource type="Texture2D" uid="uid://brnwot813fcpd" path="res://Textures/Main_Mech_Diff/Main_Mech_Legs_Diff_Flat.png" id="1_jvsba"]
+[ext_resource type="Texture2D" uid="uid://bcbhgeo8aewlh" path="res://NormalMaps/Main_Mech_Legs_Normals_Flat.png" id="2_jvsba"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ptqnr"]
+diffuse_texture = ExtResource("1_jvsba")
+normal_texture = ExtResource("2_jvsba")
+
+[node name="MainMechLegs" type="Node2D"]
+script = ExtResource("1_0mbvt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1, 1)
+rotation = 1.56423
+texture = SubResource("CanvasTexture_ptqnr")

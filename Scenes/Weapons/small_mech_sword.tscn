@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://ddqw56avt1klp"]
+[gd_scene load_steps=8 format=3 uid="uid://ddqw56avt1klp"]
 
 [ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="1_506tx"]
 [ext_resource type="Script" uid="uid://hrklt2c0ilro" path="res://Scenes/Weapons/small_mech_sword.gd" id="1_k1k81"]
+[ext_resource type="Texture2D" uid="uid://cuafmyyh5wmv8" path="res://Textures/circle_light_shape_hard15.png" id="3_1lma4"]
 
 [sub_resource type="Animation" id="Animation_1lma4"]
 length = 0.001
@@ -47,6 +48,15 @@ size = Vector2(110, 15)
 scale = Vector2(0.48612, 0.48612)
 script = ExtResource("1_k1k81")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -355.879
+offset_top = -283.881
+offset_right = -315.879
+offset_bottom = -243.881
+scale = Vector2(17.5396, 17.5396)
+color = Color(0.344076, 0.344076, 0.344076, 1)
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../SmallMechSword")
 libraries = {
@@ -57,15 +67,22 @@ autoplay = "basic_swing"
 [node name="SmallMechSword" type="Area2D" parent="."]
 scale = Vector2(0.508024, 0.0397777)
 
+[node name="PointLight2D" type="PointLight2D" parent="SmallMechSword"]
+position = Vector2(190.314, 0)
+scale = Vector2(0.472417, 1.30046)
+color = Color(0.856907, 0.000659006, 0.869985, 1)
+energy = 16.0
+texture = ExtResource("3_1lma4")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SmallMechSword"]
-position = Vector2(124.509, 10.3453)
+position = Vector2(190.314, 5.68434e-14)
 scale = Vector2(1.2907, 13.7899)
 shape = SubResource("RectangleShape2D_k1k81")
 
 [node name="SwordSprite" type="Sprite2D" parent="SmallMechSword"]
-modulate = Color(0.71099, 0.666628, 0.266704, 1)
+modulate = Color(1, 1, 1, 0.156863)
 texture = ExtResource("1_506tx")
-offset = Vector2(120, 0)
+offset = Vector2(189.8, 0)
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
 [connection signal="area_entered" from="SmallMechSword" to="." method="_on_small_mech_sword_area_entered"]

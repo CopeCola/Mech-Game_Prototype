@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://gob46hox5lyw"]
+[gd_scene load_steps=12 format=3 uid="uid://gob46hox5lyw"]
 
 [ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="1_ee00f"]
 [ext_resource type="Script" uid="uid://bykemp7c8y0pt" path="res://Scenes/Enemies/exploding_drone_enemy.gd" id="1_paae8"]
+[ext_resource type="Texture2D" uid="uid://cuafmyyh5wmv8" path="res://Textures/circle_light_shape_hard15.png" id="3_s3rny"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_paae8"]
 radius = 9.20804
@@ -71,6 +72,14 @@ _data = {
 &"explode": SubResource("Animation_paae8")
 }
 
+[sub_resource type="Curve" id="Curve_s3rny"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Gradient" id="Gradient_s3rny"]
+offsets = PackedFloat32Array(0, 0.167464, 0.311005, 0.473684, 1)
+colors = PackedColorArray(0, 0, 0.980392, 1, 0.623547, 0.419667, 0.0561033, 1, 0.737255, 0.27451, 0.0313726, 1, 0.867652, 0.734209, 7.70092e-07, 1, 1, 1, 1, 1)
+
 [node name="ExplodingDrone" type="CharacterBody2D" groups=["enemy"]]
 motion_mode = 1
 script = ExtResource("1_paae8")
@@ -103,5 +112,23 @@ shape = SubResource("CircleShape2D_apikv")
 libraries = {
 &"": SubResource("AnimationLibrary_apikv")
 }
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 40
+texture = ExtResource("3_s3rny")
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 30.0
+initial_velocity_max = 200.0
+linear_accel_min = 20.0
+linear_accel_max = 90.0
+scale_amount_min = 0.0
+scale_amount_max = 0.1
+scale_amount_curve = SubResource("Curve_s3rny")
+color_ramp = SubResource("Gradient_s3rny")
 
 [connection signal="body_entered" from="ExplodeRadius" to="." method="_on_explode_radius_body_entered"]

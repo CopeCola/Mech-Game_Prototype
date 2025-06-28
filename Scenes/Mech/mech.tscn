@@ -1,49 +1,37 @@
-[gd_scene load_steps=13 format=3 uid="uid://facd1g144ddd"]
+[gd_scene load_steps=29 format=3 uid="uid://facd1g144ddd"]
 
-[ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="1_1t1tt"]
 [ext_resource type="Script" uid="uid://y3cmox32lcdr" path="res://Scenes/Mech/mech.gd" id="1_od44f"]
+[ext_resource type="Texture2D" uid="uid://bow1tm1hq886s" path="res://Textures/Main_Mech_Diff/Body_Base.png" id="2_86rrx"]
+[ext_resource type="Texture2D" uid="uid://x0e6si2ldh76" path="res://Textures/Main_Mech_Diff/Small_Tank.png" id="2_p35vn"]
 [ext_resource type="PackedScene" uid="uid://kyvv7fi80io3" path="res://Scenes/Weapons/mech_gun.tscn" id="3_2emxb"]
+[ext_resource type="Texture2D" uid="uid://cb8kqfvscja8j" path="res://NormalMaps/Main_Mech_Normals/Body_Base_n.png" id="3_8yobe"]
+[ext_resource type="Texture2D" uid="uid://bliuksvijnr0u" path="res://NormalMaps/Main_Mech_Normals/Small_Tank_n.png" id="3_q0qpw"]
+[ext_resource type="Texture2D" uid="uid://vemq7828hfvu" path="res://Textures/Main_Mech_Diff/Body_Top.png" id="4_2nc1y"]
+[ext_resource type="Texture2D" uid="uid://b0g3op5l8eoci" path="res://Textures/Minor_Mech_Diff/Small_mech_sprite.png" id="4_q0qpw"]
+[ext_resource type="Texture2D" uid="uid://fww64ohquep" path="res://NormalMaps/Main_Mech_Normals/Body_Top_n.png" id="5_p35vn"]
+[ext_resource type="Texture2D" uid="uid://by5m1bvqmokw2" path="res://Textures/Main_Mech_Diff/Large_Tank.png" id="9_ps5e1"]
+[ext_resource type="Texture2D" uid="uid://bebay3m8chdnh" path="res://NormalMaps/Main_Mech_Normals/Large_Tank_n.png" id="10_bdkuy"]
+[ext_resource type="Texture2D" uid="uid://cuafmyyh5wmv8" path="res://Textures/circle_light_shape_hard15.png" id="12_ps5e1"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2emxb"]
+[sub_resource type="CanvasTexture" id="CanvasTexture_6j1sc"]
+diffuse_texture = ExtResource("2_p35vn")
+normal_texture = ExtResource("3_q0qpw")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_q0qpw"]
+diffuse_texture = ExtResource("2_86rrx")
+normal_texture = ExtResource("3_8yobe")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_m02kj"]
+diffuse_texture = ExtResource("9_ps5e1")
+normal_texture = ExtResource("10_bdkuy")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ps5e1"]
+diffuse_texture = ExtResource("4_2nc1y")
+normal_texture = ExtResource("5_p35vn")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ps5e1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2emxb"]
-
-[sub_resource type="Animation" id="Animation_qkgiu"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0.0941176, 0, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_2emxb"]
-resource_name = "take_damage"
-length = 0.4
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:modulate")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(0.982644, 0.0010384, 0.000570831, 1), Color(1, 1, 1, 1), Color(0.984314, 0, 0, 1), Color(1, 1, 1, 1), Color(0.0941176, 0, 0, 1)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_lrbxq"]
-_data = {
-&"RESET": SubResource("Animation_qkgiu"),
-&"take_damage": SubResource("Animation_2emxb")
-}
 
 [sub_resource type="Gradient" id="Gradient_qkgiu"]
 offsets = PackedFloat32Array(0)
@@ -59,49 +47,327 @@ colors = PackedColorArray(0, 1, 0, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xqovy"]
 gradient = SubResource("Gradient_lrbxq")
 
+[sub_resource type="Animation" id="Animation_gjidd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmlLTank:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SmlRTank:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BodyBase:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LrgRTank:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LrgRTank2:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BodyTop:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_7boh5"]
+resource_name = "take_damage"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmlLTank:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.815686, 0, 0, 1), Color(1, 1, 1, 1), Color(0.815686, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SmlRTank:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.815686, 0, 0, 1), Color(1, 1, 1, 1), Color(0.815686, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BodyBase:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.815686, 0, 0, 1), Color(1, 1, 1, 1), Color(0.815686, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("LrgRTank:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.815686, 0, 0, 1), Color(1, 1, 1, 1), Color(0.815686, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("LrgRTank2:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.815686, 0, 0, 1), Color(1, 1, 1, 1), Color(0.815686, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BodyTop:modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333, 0.2, 0.266667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.815686, 0, 0, 1), Color(1, 1, 1, 1), Color(0.815686, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_b26ok"]
+_data = {
+&"RESET": SubResource("Animation_gjidd"),
+&"take_damage": SubResource("Animation_7boh5")
+}
+
+[sub_resource type="Animation" id="Animation_bdkuy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D4:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [3.52]
+}
+
+[sub_resource type="Animation" id="Animation_ps5e1"]
+resource_name = "light_flash"
+length = 3.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PointLight2D4:energy")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.43333, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [3.52, 5.12, 3.52]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6j1sc"]
+_data = {
+&"RESET": SubResource("Animation_bdkuy"),
+&"light_flash": SubResource("Animation_ps5e1")
+}
+
 [node name="Mech" type="CharacterBody2D" groups=["mech"]]
-z_index = 1
+z_index = 2
 motion_mode = 1
 script = ExtResource("1_od44f")
 max_speed = 8000.0
 max_health = 40.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-modulate = Color(0.0941176, 0, 0, 1)
-scale = Vector2(0.63999, 0.63999)
-texture = ExtResource("1_1t1tt")
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -427.0
+offset_top = -434.0
+offset_right = -387.0
+offset_bottom = -394.0
+scale = Vector2(23.4275, 23.4275)
+color = Color(0.340339, 0.340339, 0.340339, 1)
+
+[node name="SmlLTank" type="Sprite2D" parent="."]
+position = Vector2(-83, -80)
+rotation = 2.42758
+scale = Vector2(0.255909, 0.255909)
+texture = SubResource("CanvasTexture_6j1sc")
+
+[node name="SmlRTank" type="Sprite2D" parent="."]
+position = Vector2(-84, 79)
+rotation = 0.737303
+scale = Vector2(0.255909, 0.255909)
+texture = SubResource("CanvasTexture_6j1sc")
+
+[node name="MinorMechSprite" type="Sprite2D" parent="."]
+position = Vector2(-99, 1)
+rotation = 1.5708
+scale = Vector2(0.0660134, 0.0660134)
+texture = ExtResource("4_q0qpw")
+
+[node name="BodyBase" type="Sprite2D" parent="."]
+rotation = 1.57152
+scale = Vector2(0.192072, 0.192072)
+texture = SubResource("CanvasTexture_q0qpw")
+
+[node name="LrgRTank" type="Sprite2D" parent="."]
+position = Vector2(-107, 51)
+rotation = 1.09763
+scale = Vector2(0.11851, 0.11851)
+texture = SubResource("CanvasTexture_m02kj")
+
+[node name="LrgRTank2" type="Sprite2D" parent="."]
+position = Vector2(-106, -50)
+rotation = 2.04841
+scale = Vector2(0.11851, 0.11851)
+texture = SubResource("CanvasTexture_m02kj")
+
+[node name="BodyTop" type="Sprite2D" parent="."]
+position = Vector2(30, 0)
+rotation = 1.5708
+scale = Vector2(0.200164, 0.200164)
+texture = SubResource("CanvasTexture_ps5e1")
+
+[node name="MechGun" parent="." groups=["mech_gun"] instance=ExtResource("3_2emxb")]
+position = Vector2(-10, -1)
+rotation = 0.0103602
+scale = Vector2(0.159125, 0.159125)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(3.81032, 3.66937)
-shape = SubResource("RectangleShape2D_2emxb")
-
-[node name="MechGun" parent="." instance=ExtResource("3_2emxb")]
-rotation = 0.00152852
-scale = Vector2(0.336849, 0.336849)
+scale = Vector2(3.06173, 3.06173)
+shape = SubResource("CircleShape2D_ps5e1")
 
 [node name="InteractArea" type="Area2D" parent="." groups=["mech"]]
+position = Vector2(1, -11)
+scale = Vector2(2.25687, -2.92597)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractArea"]
-scale = Vector2(5.6832, 5.1616)
+visible = false
+position = Vector2(1.3568e-08, -3.75944)
+scale = Vector2(6.72482, 3.66165)
 shape = SubResource("CircleShape2D_2emxb")
 
 [node name="PilotExitPos" type="Marker2D" parent="."]
-position = Vector2(0, -67)
+position = Vector2(162, 0)
 
 [node name="SmallMechExitPos" type="Marker2D" parent="."]
-position = Vector2(0, 80)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_lrbxq")
-}
+position = Vector2(-168, 0)
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="."]
-offset_left = -33.0
-offset_top = -33.0
-offset_right = 31.0
-offset_bottom = 31.0
-scale = Vector2(1.06554, 0.156427)
+offset_left = 84.0
+offset_top = 19.0
+offset_right = 148.0
+offset_bottom = 83.0
+rotation = -1.57631
+scale = Vector2(0.586424, 0.0860902)
 max_value = 20.0
 texture_under = SubResource("GradientTexture2D_qkgiu")
 texture_progress = SubResource("GradientTexture2D_xqovy")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_b26ok")
+}
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(125, 0)
+scale = Vector2(0.154415, 0.0784976)
+color = Color(0.573375, 1, 0.371071, 1)
+energy = 9.0
+texture = ExtResource("12_ps5e1")
+height = 344.0
+
+[node name="PointLight2D4" type="PointLight2D" parent="."]
+position = Vector2(132, -27)
+rotation = 0.786197
+scale = Vector2(0.00269306, 0.00269306)
+color = Color(0.98195, 0.180148, 0.157183, 1)
+energy = 3.52
+texture = ExtResource("12_ps5e1")
+texture_scale = 7.43
+
+[node name="PointLight2D5" type="PointLight2D" parent="."]
+position = Vector2(133, 26)
+rotation = -2.19548
+scale = Vector2(0.00269306, 0.00269306)
+color = Color(0.98195, 0.180148, 0.157183, 1)
+energy = 3.5
+texture = ExtResource("12_ps5e1")
+texture_scale = 7.43
+
+[node name="AnimationPlayerLights" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_6j1sc")
+}
+autoplay = "light_flash"

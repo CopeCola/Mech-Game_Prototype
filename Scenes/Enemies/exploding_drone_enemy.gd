@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+@onready var cpu_particles_2d: CPUParticles2D = $CPUParticles2D
+@onready var sprite_2d: Sprite2D = $Sprite2D
 
 @export var speed: float = 150.0
 @export var zigzag_frequency: float = 10.0  # How often they zigzag
@@ -68,18 +70,27 @@ func explode():
 	if is_instance_valid(pilot):
 		animation_player.play("explode")
 		await animation_player.animation_finished
+		sprite_2d.queue_free()
+		cpu_particles_2d.emitting = true
+		await get_tree().create_timer(.3).timeout
 		if is_instance_valid(pilot):
 			pilot.take_damage(damage)
 			queue_free()
 	if is_instance_valid(mech):
 		animation_player.play("explode")
 		await animation_player.animation_finished
+		sprite_2d.queue_free()
+		cpu_particles_2d.emitting = true
+		await get_tree().create_timer(.3).timeout
 		if is_instance_valid(mech):
 			mech.take_damage(damage)
 			queue_free()
 	if is_instance_valid(small_mech):
 		animation_player.play("explode")
 		await animation_player.animation_finished
+		sprite_2d.queue_free()
+		cpu_particles_2d.emitting = true
+		await get_tree().create_timer(.3).timeout
 		if is_instance_valid(small_mech):
 			small_mech.take_damage(damage)
 			queue_free()

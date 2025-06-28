@@ -1,21 +1,373 @@
-[gd_scene load_steps=3 format=3 uid="uid://kyvv7fi80io3"]
+[gd_scene load_steps=11 format=3 uid="uid://kyvv7fi80io3"]
 
-[ext_resource type="Texture2D" uid="uid://c12w3387vafjg" path="res://icon.svg" id="1_8j4go"]
 [ext_resource type="Script" uid="uid://b153ycc47ic6t" path="res://Scenes/Weapons/mech_gun.gd" id="1_risxw"]
+[ext_resource type="Texture2D" uid="uid://vgu80nvyl2ra" path="res://Textures/Main_Mech_Diff/Cannon.png" id="2_4ioxh"]
+[ext_resource type="Texture2D" uid="uid://ctef68osymf1" path="res://NormalMaps/Main_Mech_Normals/Cannon_n.png" id="3_23aaf"]
+[ext_resource type="Texture2D" uid="uid://cuafmyyh5wmv8" path="res://Textures/circle_light_shape_hard15.png" id="4_23aaf"]
+[ext_resource type="Texture2D" uid="uid://c3nfri10m2lxd" path="res://Textures/circle_light_shape.png" id="5_wf3w0"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_wf3w0"]
+diffuse_texture = ExtResource("2_4ioxh")
+normal_texture = ExtResource("3_23aaf")
+
+[sub_resource type="Curve" id="Curve_wf3w0"]
+_data = [Vector2(0, 0.545455), 0.0, 0.0, 0, 0, Vector2(1, 0.415584), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_l8x4e"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(130, 0.254884)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(448.995, 2.88033)]
+}
+
+[sub_resource type="Animation" id="Animation_wf3w0"]
+resource_name = "shoot"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Base:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.233333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(130, 0.254884), Vector2(110, 0.255), Vector2(120, 0.255), Vector2(120, 0.255)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D2:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(448.995, 2.88033), Vector2(1000, 2.88)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1eqve"]
+_data = {
+&"RESET": SubResource("Animation_l8x4e"),
+&"shoot": SubResource("Animation_wf3w0")
+}
 
 [node name="MechGun" type="Node2D"]
+rotation = -0.00196065
 script = ExtResource("1_risxw")
 
-[node name="Base" type="Sprite2D" parent="."]
-modulate = Color(0.17, 0.17, 0.17, 1)
-position = Vector2(0, -1.19209e-07)
-texture = ExtResource("1_8j4go")
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -356.923
+offset_top = -549.701
+offset_right = -316.923
+offset_bottom = -509.701
+scale = Vector2(41.4534, 32.5203)
+color = Color(0.201527, 0.201527, 0.201527, 1)
 
-[node name="Barrel" type="Sprite2D" parent="Base"]
-position = Vector2(120, 1.19209e-07)
-rotation = 1.56581
-scale = Vector2(0.362238, 2.1421)
-texture = ExtResource("1_8j4go")
+[node name="Base" type="Sprite2D" parent="."]
+position = Vector2(130, 0.254884)
+rotation = 1.57328
+texture = SubResource("CanvasTexture_wf3w0")
+
+[node name="CPUParticles2D4" type="CPUParticles2D" parent="Base"]
+position = Vector2(29.1124, 214.985)
+rotation = -0.735749
+scale = Vector2(0.172637, 0.172637)
+emitting = false
+amount = 30
+texture = ExtResource("5_wf3w0")
+lifetime = 0.1
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.7
+randomness = 0.21
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(0, 82.105)
+spread = 35.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 828.13
+initial_velocity_max = 1000.0
+scale_amount_min = 0.0
+scale_amount_max = 0.1
+color = Color(0.977887, 0.999997, 0.859722, 1)
+
+[node name="CPUParticles2D5" type="CPUParticles2D" parent="Base"]
+position = Vector2(28.076, 182.986)
+rotation = -0.881312
+scale = Vector2(0.172637, 0.172637)
+emitting = false
+amount = 30
+texture = ExtResource("5_wf3w0")
+lifetime = 0.2
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.7
+randomness = 0.21
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(0, 82.105)
+spread = 35.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 828.13
+initial_velocity_max = 1000.0
+scale_amount_min = 0.0
+scale_amount_max = 0.1
+color = Color(0.977887, 0.999997, 0.859722, 1)
+
+[node name="CPUParticles2D6" type="CPUParticles2D" parent="Base"]
+position = Vector2(28.0805, 153.986)
+rotation = -0.900667
+scale = Vector2(0.172637, 0.172637)
+emitting = false
+amount = 30
+texture = ExtResource("5_wf3w0")
+lifetime = 0.2
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.7
+randomness = 0.21
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(0, 82.105)
+spread = 35.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 828.13
+initial_velocity_max = 1000.0
+scale_amount_min = 0.0
+scale_amount_max = 0.1
+color = Color(0.977887, 0.999997, 0.859722, 1)
+
+[node name="CPUParticles2D7" type="CPUParticles2D" parent="Base"]
+position = Vector2(-28.9194, 154.015)
+rotation = -2.21784
+scale = Vector2(0.172637, 0.172637)
+emitting = false
+amount = 30
+texture = ExtResource("5_wf3w0")
+lifetime = 0.2
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.7
+randomness = 0.21
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(0, 82.105)
+spread = 35.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 828.13
+initial_velocity_max = 1000.0
+scale_amount_min = 0.0
+scale_amount_max = 0.1
+color = Color(0.977887, 0.999997, 0.859722, 1)
+
+[node name="CPUParticles2D8" type="CPUParticles2D" parent="Base"]
+position = Vector2(-28.9043, 183.015)
+rotation = -2.24697
+scale = Vector2(0.172637, 0.172637)
+emitting = false
+amount = 30
+texture = ExtResource("5_wf3w0")
+lifetime = 0.2
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.7
+randomness = 0.21
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(0, 82.105)
+spread = 35.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 828.13
+initial_velocity_max = 1000.0
+scale_amount_min = 0.0
+scale_amount_max = 0.1
+color = Color(0.977887, 0.999997, 0.859722, 1)
+
+[node name="CPUParticles2D9" type="CPUParticles2D" parent="Base"]
+position = Vector2(-27.8876, 215.015)
+rotation = -2.31733
+scale = Vector2(0.172637, 0.172637)
+emitting = false
+amount = 30
+texture = ExtResource("5_wf3w0")
+lifetime = 0.2
+one_shot = true
+speed_scale = 2.0
+explosiveness = 0.7
+randomness = 0.21
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(0, 82.105)
+spread = 35.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 828.13
+initial_velocity_max = 1000.0
+scale_amount_min = 0.0
+scale_amount_max = 0.1
+color = Color(0.977887, 0.999997, 0.859722, 1)
 
 [node name="BarrelEnd" type="Marker2D" parent="."]
-position = Vector2(282, 0)
+position = Vector2(448.999, 0.880331)
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(140.008, -3.7255)
+scale = Vector2(1.26062, 0.25951)
+enabled = false
+color = Color(1, 1, 0.176471, 1)
+energy = 6.3
+texture = ExtResource("4_23aaf")
+height = 241.0
+
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(448.995, 2.88033)
+rotation = 1.55769
+scale = Vector2(0.646748, 1.78147)
+color = Color(1, 1, 0.176471, 1)
+energy = 2.0
+texture = ExtResource("4_23aaf")
+height = 505.0
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+position = Vector2(605.005, -1.8138)
+scale = Vector2(1.98907, 0.366163)
+emitting = false
+amount = 70
+texture = ExtResource("4_23aaf")
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.52
+randomness = 0.21
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 55.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 217.48
+initial_velocity_max = 1000.0
+scale_amount_min = 0.0
+scale_amount_max = 0.5
+split_scale = true
+scale_curve_x = null
+scale_curve_y = SubResource("Curve_wf3w0")
+
+[node name="CPUParticles2D42" type="CPUParticles2D" parent="."]
+position = Vector2(460.156, -79.0979)
+rotation = -1.57565
+scale = Vector2(0.989023, 0.182067)
+emitting = false
+amount = 70
+texture = ExtResource("4_23aaf")
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.52
+randomness = 0.21
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 55.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 217.48
+initial_velocity_max = 1000.0
+scale_amount_min = 0.0
+scale_amount_max = 0.5
+split_scale = true
+scale_curve_x = null
+scale_curve_y = SubResource("Curve_wf3w0")
+
+[node name="CPUParticles2D52" type="CPUParticles2D" parent="."]
+position = Vector2(461.864, 69.9057)
+rotation = 1.5467
+scale = Vector2(0.989023, 0.182067)
+emitting = false
+amount = 70
+texture = ExtResource("4_23aaf")
+lifetime = 0.2
+one_shot = true
+explosiveness = 0.52
+randomness = 0.21
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 10.0
+spread = 55.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 217.48
+initial_velocity_max = 1000.0
+scale_amount_min = 0.0
+scale_amount_max = 0.5
+split_scale = true
+scale_curve_x = null
+scale_curve_y = SubResource("Curve_wf3w0")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+position = Vector2(37.2607, -132.927)
+rotation = -2.06513
+scale = Vector2(0.358293, 0.358293)
+emitting = false
+amount = 30
+texture = ExtResource("5_wf3w0")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.7
+randomness = 0.21
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 66.99
+spread = 35.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 617.19
+initial_velocity_max = 617.19
+scale_amount_min = 0.0
+scale_amount_max = 0.1
+color = Color(0.977887, 0.999997, 0.859722, 1)
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="."]
+position = Vector2(39.7313, 137.078)
+rotation = 2.02092
+scale = Vector2(0.358294, 0.358294)
+emitting = false
+amount = 30
+texture = ExtResource("5_wf3w0")
+lifetime = 0.3
+one_shot = true
+explosiveness = 0.7
+randomness = 0.21
+local_coords = true
+emission_shape = 1
+emission_sphere_radius = 66.99
+spread = 35.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 617.19
+initial_velocity_max = 617.19
+scale_amount_min = 0.0
+scale_amount_max = 0.1
+color = Color(0.977887, 0.999997, 0.859722, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1eqve")
+}

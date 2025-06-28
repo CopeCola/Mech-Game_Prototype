@@ -2,12 +2,18 @@ extends CharacterBody2D
 class_name Mech
 
 var testing_git
+@onready var animation_player_lights: AnimationPlayer = $AnimationPlayerLights
+
+
+@onready var minor_mech_sprite: Sprite2D = $MinorMechSprite
 @onready var pilot_scene = preload("res://Scenes/Pilot/Pilot.tscn")
 @onready var small_mech_scene = preload("res://Scenes/Small_Mech/small_mech.tscn")
 @onready var pilot_exit_pos: Marker2D = $PilotExitPos
 @onready var small_mech_exit_pos: Marker2D = $SmallMechExitPos
+@onready var mech_gun = get_tree().get_first_node_in_group("mech_gun")
 
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
+
 @onready var health_bar: TextureProgressBar = $TextureProgressBar
 
 @export var max_speed: float = 20000
@@ -53,6 +59,15 @@ func _process(delta: float) -> void:
 		GameManager.mech_pos = global_position
 
 
+		#var mouse_pos = get_global_mouse_position()
+		#var target_angle = (mouse_pos - global_position).angle()
+		#var angle_diff = wrapf(target_angle - global_rotation, -PI, PI)
+	#
+		#global_rotation += sign(angle_diff) * min(abs(angle_diff), .5 * delta)
+
+		var mouse_pos = get_global_mouse_position()
+		global_rotation = lerp_angle(rotation, mech_gun.global_rotation, 0.005)
+
 func get_move_vector():
 	var x_vec = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var y_vec = Input.get_action_strength("move_down") - Input.get_action_strength("move_up")
@@ -95,6 +110,7 @@ func eject_pilot():
 
 
 func eject_small_mech():
+	minor_mech_sprite.visible = false
 	var small_mech_instance = small_mech_scene.instantiate()
 	small_mech_instance.connect("entered_mech", pilot_in_mech)
 	small_mech = small_mech_instance

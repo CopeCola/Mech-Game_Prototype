@@ -4,10 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://facd1g144ddd" path="res://Scenes/Mech/mech.tscn" id="1_qd8ud"]
 [ext_resource type="Script" uid="uid://c87chamd7oc3l" path="res://Scenes/Main/main_scene.gd" id="1_ywtrf"]
 [ext_resource type="PackedScene" uid="uid://buxsds0l5crjn" path="res://Scenes/Main/main_camera.tscn" id="4_d5b16"]
-[ext_resource type="PackedScene" uid="uid://45n5gmmx1e3r" path="res://Scenes/Spawners/basic_enemy_spawner.tscn" id="4_ywtrf"]
+[ext_resource type="Texture2D" uid="uid://cuafmyyh5wmv8" path="res://Textures/circle_light_shape_hard15.png" id="5_d5b16"]
 [ext_resource type="PackedScene" uid="uid://cbm7xejjcyism" path="res://Scenes/Survivor/survivor.tscn" id="5_dahi5"]
-[ext_resource type="PackedScene" uid="uid://b2al7vbiun14i" path="res://Scenes/Environment/ruin_type_1.tscn" id="6_ip5ju"]
-[ext_resource type="PackedScene" uid="uid://co7bgnjstbsvx" path="res://Scenes/Enemies/basic_enemy.tscn" id="8_vudmy"]
+[ext_resource type="PackedScene" uid="uid://45n5gmmx1e3r" path="res://Scenes/Spawners/basic_enemy_spawner.tscn" id="5_vudmy"]
+[ext_resource type="PackedScene" uid="uid://bxy1360wkpm5b" path="res://Scenes/Mech/main_mech_legs.tscn" id="8_vudmy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_llcsg"]
+shader = ExtResource("1_llcsg")
+shader_parameter/grid_size = Vector2(50, 50)
+shader_parameter/color1 = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/color2 = Color(0.4, 0.4, 0.4, 1)
+shader_parameter/aspect_ratio_vector = Vector2(1, 1.1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_dahi5"]
 font_size = 48
@@ -20,20 +27,19 @@ font_color = Color(0, 0, 0.611765, 1)
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_llcsg"]
-shader = ExtResource("1_llcsg")
-shader_parameter/grid_size = Vector2(50, 50)
-shader_parameter/color1 = Color(0.8, 0.8, 0.8, 1)
-shader_parameter/color2 = Color(0.4, 0.4, 0.4, 1)
-shader_parameter/aspect_ratio_vector = Vector2(1, 1.1)
-
 [node name="MainScene" type="Node2D"]
 script = ExtResource("1_ywtrf")
 
-[node name="MainCamera" parent="." groups=["camera"] instance=ExtResource("4_d5b16")]
-position = Vector2(2172, 1546)
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -2
+material = SubResource("ShaderMaterial_llcsg")
+offset_top = 1.0
+offset_right = 40.0
+offset_bottom = 41.0
+scale = Vector2(110.319, 66.1289)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="Control" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -95,19 +101,34 @@ ENTER MECHS: E
 REPAIR MECH: RIGHT CLICK"
 label_settings = SubResource("LabelSettings_ip5ju")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_llcsg")
-offset_top = 1.0
-offset_right = 40.0
-offset_bottom = 41.0
-scale = Vector2(110.319, 66.1289)
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+color = Color(0.800329, 0.629141, 0.302085, 1)
+energy = 0.88
+blend_mode = 2
+height = 0.21
+
+[node name="MainCamera" parent="." groups=["camera"] instance=ExtResource("4_d5b16")]
+position = Vector2(2172, 1546)
 
 [node name="Mech" parent="." instance=ExtResource("1_qd8ud")]
-position = Vector2(2165, 1539)
+position = Vector2(2215, 1456)
+scale = Vector2(1.99047, 1.99047)
 
-[node name="BasicEnemySpawner" parent="Mech" instance=ExtResource("4_ywtrf")]
-position = Vector2(-289, -410)
-scale = Vector2(28.2423, 14.8178)
+[node name="BasicEnemySpawner" parent="Mech" instance=ExtResource("5_vudmy")]
+position = Vector2(278.326, -363.733)
+rotation = 0.704864
+scale = Vector2(13.1905, 11.1342)
+
+[node name="BasicEnemySpawner2" parent="Mech" instance=ExtResource("5_vudmy")]
+position = Vector2(-83.8998, -544.595)
+scale = Vector2(13.6985, -10.3436)
+
+[node name="BasicEnemySpawner3" parent="Mech" instance=ExtResource("5_vudmy")]
+position = Vector2(-533.542, -471.748)
+rotation = -0.477393
+scale = Vector2(12.6152, 2.41282)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
 
 [node name="BulletContainer" type="Node2D" parent="." groups=["bullet_container"]]
 
@@ -120,6 +141,7 @@ scale = Vector2(28.2423, 14.8178)
 [node name="EnemyDroneContainer" type="Node2D" parent="." groups=["enemy_drone_container"]]
 
 [node name="SurvivorContainer" type="Node2D" parent="."]
+visible = false
 
 [node name="Survivor" parent="SurvivorContainer" instance=ExtResource("5_dahi5")]
 position = Vector2(2061, 914)
@@ -187,9 +209,60 @@ scale = Vector2(0.26066, 0.26066)
 
 [node name="CollectableContainer" type="Node2D" parent="." groups=["collectable_container"]]
 
-[node name="RuinType1" parent="." instance=ExtResource("6_ip5ju")]
-position = Vector2(2455, 1629)
-scale = Vector2(1.80231, 1.80231)
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(2299, 1073)
+scale = Vector2(0.365969, 0.365969)
+color = Color(1, 0.407843, 0.215686, 1)
+energy = 4.77
+texture = ExtResource("5_d5b16")
+texture_scale = 7.43
+height = 468.0
 
-[node name="BasicEnemy" parent="." instance=ExtResource("8_vudmy")]
-position = Vector2(2000, 1164)
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(1256, 863)
+scale = Vector2(0.365969, 0.365969)
+color = Color(0.690496, 0.510089, 0.971562, 1)
+energy = 4.77
+texture = ExtResource("5_d5b16")
+texture_scale = 7.43
+height = 468.0
+
+[node name="PointLight2D3" type="PointLight2D" parent="."]
+position = Vector2(3221, 592)
+scale = Vector2(0.365969, 0.365969)
+color = Color(1, 0.407843, 0.215686, 1)
+energy = 11.17
+texture = ExtResource("5_d5b16")
+texture_scale = 7.43
+height = 468.0
+
+[node name="PointLight2D4" type="PointLight2D" parent="."]
+position = Vector2(2173, 2271)
+scale = Vector2(0.153555, 0.153555)
+color = Color(1, 0.407843, 0.215686, 1)
+energy = 6.03
+texture = ExtResource("5_d5b16")
+texture_scale = 7.43
+height = 341.0
+
+[node name="PointLight2D6" type="PointLight2D" parent="."]
+position = Vector2(1048, 1824)
+scale = Vector2(0.365969, 0.365969)
+color = Color(1, 0.407843, 0.215686, 1)
+energy = 7.74
+texture = ExtResource("5_d5b16")
+texture_scale = 7.43
+height = 775.0
+
+[node name="PointLight2D5" type="PointLight2D" parent="."]
+position = Vector2(3083, 1832)
+scale = Vector2(0.365969, 0.365969)
+color = Color(0.727471, 0.616, 0, 1)
+energy = 3.03
+texture = ExtResource("5_d5b16")
+texture_scale = 7.43
+height = 468.0
+
+[node name="MainMechLegs" parent="." instance=ExtResource("8_vudmy")]
+position = Vector2(827, 2269)
+scale = Vector2(0.381587, 0.381587)

@@ -46,8 +46,12 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_wm5yt"]
 
 [node name="BasicEnemy" type="CharacterBody2D" groups=["enemy"]]
+z_index = 1
 motion_mode = 1
 script = ExtResource("1_jln43")
+rush_distance = 900.0
+retreat_distance = 500.0
+stop_distance = 700.0
 rush_speed_multiplier = 1.2
 enemy_speed = 6000
 
@@ -57,7 +61,7 @@ scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_px3k0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(2.11564, 2.11564)
+scale = Vector2(1.24461, 1.24461)
 shape = SubResource("CircleShape2D_jln43")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -72,7 +76,7 @@ scale = Vector2(0.45017, 0.45017)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ShootEnabledArea"]
 position = Vector2(24.4352, 2.22138)
-scale = Vector2(80, 80)
+scale = Vector2(155.694, 155.694)
 shape = SubResource("CircleShape2D_wm5yt")
 
 [node name="DroneDeployPos" type="Marker2D" parent="."]

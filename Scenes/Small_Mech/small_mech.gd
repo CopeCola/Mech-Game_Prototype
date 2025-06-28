@@ -3,6 +3,11 @@ class_name SmallMech
 
 signal entered_mech
 
+@export var rotation_speed: float = 5.0 # radians per second
+@export var max_angle_offset: float = 0.2 # radians threshold to prevent jitter
+
+var _target_angle: float
+
 @onready var small_mech_sword = preload("res://Scenes/Weapons/small_mech_sword.tscn")
 @onready var pilot_scene = preload("res://Scenes/Pilot/Pilot.tscn")
 @onready var pilot_exit_pos: Marker2D = $PilotExitPos
@@ -32,6 +37,7 @@ func _input(event: InputEvent) -> void:
 		if not GameManager.in_mech and can_interact_with_mech:
 			GameManager.in_mech = true
 			GameManager.in_small_mech = false
+			GameManager.mech.minor_mech_sprite.visible = true
 			GameManager.emit_signal("camera_state_changed", MainCamera.CameraState.ON_MECH)
 
 			emit_signal("entered_mech")
@@ -55,7 +61,16 @@ func _process(delta: float) -> void:
 	if GameManager.in_small_mech and not GameManager.in_mech:
 		handle_movement(delta)
 		GameManager.small_mech_pos = global_position
-
+			# Get target direction to mouse
+		var mouse_pos = get_global_mouse_position()
+		_target_angle = (mouse_pos - global_position).angle()
+	
+	# Calculate needed rotation
+		var angle_diff = wrapf(_target_angle - rotation, -PI, PI)
+	
+	# Apply rotation if difference is large enough
+		if abs(angle_diff) > max_angle_offset:
+			rotation += sign(angle_diff) * min(abs(angle_diff), rotation_speed * delta)
 
 func get_move_vector():
 	var x_vec = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
@@ -80,11 +95,11 @@ func dash():
 	if get_move_vector() != Vector2.ZERO:
 			dashing = true
 			small_mech_speed *= 3
-			await get_tree().create_timer(.2).timeout
+			await get_tree().create_timer(.4).timeout
 			set_disabled_status()
 			dashing = false
 			can_dash = false
-			await get_tree().create_timer(1.5).timeout
+			await get_tree().create_timer(1).timeout
 			can_dash = true
 
 
